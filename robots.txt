@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/comments.js
+
+# 仅供阅读与索引，请勿采集留言
