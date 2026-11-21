@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>抽屉 · 我上传的资料 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「莲藏 · 抽屉」：站主自己扫描、整理、上传的资料，网盘链接与提取码集中在这里。">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 5c3 5 3 10 0 14-3-4-3-9 0-14z" fill="#5f8f8a"/>
+        <path d="M16 19c-5-1-9-5-10-10 5 .5 8.5 4 10 10z" fill="#5f8f8a" opacity=".75"/>
+        <path d="M16 19c5-1 9-5 10-10-5 .5-8.5 4-10 10z" fill="#5f8f8a" opacity=".75"/>
+      </svg>
+      <span style="display:flex;flex-direction:column;line-height:1.25">
+        <b>莲渡文汇</b><span>LIAN DU WEN HUI</span>
+      </span>
+    </a>
+    <nav class="main">
+      <a href="../">首页</a>
+      <a href="../qa/">莲叙</a>
+      <a class="on" href="../library/">莲藏</a>
+      <a href="../submit/">投稿</a>
+      <a href="../about/">关于</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumb" aria-label="当前位置">
+    <a href="../">首页</a><span class="sep">/</span><a href="../library/">莲藏</a><span class="sep">/</span><em>抽屉</em>
+  </nav>
+
+  <section class="hero" style="padding:44px 0 24px">
+    <p class="kicker">莲 藏 · 抽 屉</p>
+    <h1 style="font-size:clamp(23px,4vw,31px)">我自己上传的资料</h1>
+    <p class="lead">
+      这里只放我自己扫描、整理、汇总之后上传的东西。文件都放在网盘，本站不存文件本体，
+      只登记名字、简介和链接——点开就跳走，提取码直接写在条目里。
+    </p>
+    <p class="lead" style="font-size:13.5px;color:var(--muted);margin-bottom:0">
+      和莲藏其他条目不同：那些多是指向别人公开页面的索引，这一页全是我自己放的。
+    </p>
+  </section>
+
+  <section class="block" style="padding-top:0;border-top:none">
+    <div class="two-col">
+      <div class="note">
+        <b>怎么拿</b><br>
+        点条目的按钮进网盘，提取码在按钮后面，选中就能复制。链接失效、文件损坏，
+        写信到 <a href="mailto:13332430323@189.cn">13332430323@189.cn</a> 说一声，我重新传。
+      </div>
+      <div class="note">
+        <b>放什么</b><br>
+        我自己做的年表、目录、摘记、整理稿，以及我确认可以分享的内容。
+        他人作品的全文、扫描件、付费课程不放，见<a href="../rules/">站规</a>。
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:10px">
+    <h2 class="sec">已上传 <small id="count"></small></h2>
+    <div id="file-list"></div>
+    <noscript>
+      <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>FILES</code> 里。</p>
+    </noscript>
+  </section>
+
+  <nav class="backbar" aria-label="返回">
+    <a class="btn" href="../library/">← 返回 莲藏</a>
+    <a class="btn" href="../">回到首页</a>
+  </nav>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="y">2026</span> 莲渡文汇</span>
+    <span class="sep">·</span>
+    <a href="../rules/">站规与版权说明</a>
+    <span class="sep">·</span>
+    <a href="../about/">关于本站</a>
+  </div>
+</footer>
+
+<!--
+  ┌─ 怎么加一份 ─────────────────────────────────────────
+  │ 在 FILES 数组里复制一段 { ... }，改字段：
+  │   title    名字（必填）
+  │   desc     一两句说明，里面有什么
+  │   platform 网盘名，例如：百度网盘 / 阿里云盘 / 天翼云盘 / 夸克
+  │   link     分享链接（必填）
+  │   code     提取码；没有就写 ''
+  │   size     文件大小，例如：120 MB / 3 个文件
+  │   updated  更新日期
+  │ 加完 git push，约一分钟生效。
+  └──────────────────────────────────────────────────────
+-->
+<script>
+  var FILES = [
+    // 示例（删掉后换成你自己的）：
+    // {
+    //   title: '读书笔记模板（A5 方格本版）',
+    //   desc: '我自己用的三栏格式，打印后裁成 A5 贴在方格本上。含一页填写示例。',
+    //   platform: '百度网盘',
+    //   link: 'https://pan.baidu.com/s/xxxxxxxx',
+    //   code: 'ab12',
+    //   size: '1.2 MB',
+    //   updated: '2026-11-21'
+    // }
+  ];
+
+  (function () {
+    var box = document.getElementById('file-list');
+    var c = document.getElementById('count');
+    if (!box) return;
+
+    if (!FILES.length) {
+      if (c) c.textContent = '0 份';
+      box.innerHTML =
+        '<div class="note"><b>抽屉还空着。</b><br>' +
+        '材料还在整理，做好一份就挂一份，不凑数。如果你在等某一份，' +
+        '可以写信到 <a href="mailto:13332430323@189.cn">13332430323@189.cn</a> 说一声，' +
+        '我先紧着你要的那份做。</div>';
+      return;
+    }
+
+    if (c) c.textContent = FILES.length + ' 份';
+
+    box.innerHTML = FILES.map(function (f) {
+      var lines = [];
+      if (f.platform) lines.push({ k: '位置', v: f.platform });
+      if (f.size) lines.push({ k: '大小', v: f.size });
+      if (f.code) lines.push({ k: '提取码', v: '<code>' + f.code + '</code>' });
+
+      return '<article class="item">' +
+        '<div class="item-head"><h3>' + f.title + '</h3><span class="tag">网盘</span></div>' +
+        (f.desc ? '<p class="desc">' + f.desc + '</p>' : '') +
+        (lines.length ? '<div class="lines">' + lines.map(function (l) {
+          return '<div><span>' + l.k + '</span><span>' + l.v + '</span></div>';
+        }).join('') + '</div>' : '') +
+        (f.link ? '<div class="files"><a class="file ext" href="' + f.link + '" target="_blank" rel="noopener">' +
+          '打开网盘<em>' + (f.platform || '外部链接') + '</em></a>' +
+          (f.code ? '<a class="file" href="' + f.link + '" target="_blank" rel="noopener">' +
+            '提取码 ' + f.code + '<em>点这里也能进</em></a>' : '') +
+          '</div>' : '') +
+        (f.updated ? '<p class="upd">更新于 ' + f.updated + '</p>' : '') +
+      '</article>';
+    }).join('');
+  })();
+</script>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

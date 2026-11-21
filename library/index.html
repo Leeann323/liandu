@@ -53,8 +53,8 @@
     <div class="two-col">
       <div class="note">
         <b>文件放哪</b><br>
-        能放进仓库的，放在 <code>library/files/</code> 下直接给站内地址（单个文件建议不超过 20MB）；
-        放不下的，给一个<strong>外部链接</strong>（网盘或文档站），页面只做索引，不保证长期可用。
+        小文件可以直接放进仓库（<code>library/files/</code>，单个建议不超过 20MB）；
+        大文件、成套的东西走网盘，统一登记在<a href="drawer.html">「抽屉」</a>那一页。
       </div>
       <div class="note">
         <b>收什么，不收什么</b><br>
@@ -65,7 +65,16 @@
   </section>
 
   <section class="block" style="padding-top:10px">
-    <h2 class="sec">已收录 <small id="count"></small></h2>
+    <a class="pin" href="drawer.html">
+      <span class="pin-badge">置顶</span>
+      <div class="pin-body">
+        <h3>抽屉｜我自己上传的资料</h3>
+        <p>我扫描、整理、上传的东西都在这一页。文件放在网盘，本站不存本体，链接与提取码一起列，失效来信我重传。</p>
+      </div>
+      <span class="pin-go">进入 →</span>
+    </a>
+
+    <h2 class="sec" style="margin-top:26px">已收录 <small id="count"></small></h2>
     <div id="item-list"></div>
     <noscript>
       <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>ITEMS</code> 里。</p>
@@ -129,17 +138,6 @@
       lines: [{ k: '作品', v: '《古代汉语》（主编）《汉语史稿》《诗词格律》《中国语法理论》' }],
       files: [
         { label: '维基百科条目', href: 'https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%8A%9B_(%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%AE%B6)', note: '外部链接' }
-      ],
-      updated: '2026-11-21'
-    },
-    {
-      title: '这个抽屉的使用说明',
-      kind: '说明',
-      who: '文件怎么放、条目怎么写',
-      desc: '想自己往里放东西时的格式约定：单文件建议不超过 20MB，超过就走外部链接；文件名用英文或拼音，不留空格。',
-      lines: [{ k: '位置', v: 'library/files/README.txt' }],
-      files: [
-        { label: 'README.txt', href: 'files/README.txt', note: '站内文件' }
       ],
       updated: '2026-11-21'
     }

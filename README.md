@@ -48,7 +48,8 @@ qa/               莲叙
   *.html          文章页
 library/          莲藏
   index.html      素材存档（条目写在页面脚本的 ITEMS 里）
-  files/          可放进仓库的资料文件
+  drawer.html     抽屉：站主自己上传的资料与网盘链接
+  files/          可直接放进仓库的小文件
 submit/           投稿说明
 about/ rules/     关于 / 站规
 assets/           样式、评论加载器、Giscus 配置
