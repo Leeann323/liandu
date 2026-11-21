@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>莲藏 · 作者资料 | 莲渡文汇</title>
-<meta name="description" content="莲渡文汇「莲藏」：作者资料存档——生平、身份、作品清单与相关线索。">
+<title>莲藏 · 素材存档 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「莲藏」：陆续整理的各类资料存档——作者与作品、清单与模板、工具与线索。">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -35,12 +35,17 @@
   <nav class="crumb" aria-label="当前位置">
     <a href="../">首页</a><span class="sep">/</span><em>莲藏</em>
   </nav>
-  <section class="hero" style="padding:52px 0 24px">
+
+  <section class="hero" style="padding:44px 0 24px">
     <p class="kicker">莲 藏</p>
-    <h1 style="font-size:clamp(23px,4vw,31px)">作者资料</h1>
+    <h1 style="font-size:clamp(23px,4vw,31px)">素材存档</h1>
     <p class="lead">
-      目前只做一件事：把作者资料存下来。生平、身份、作品清单、相关线索，一条一位作者。
-      不写书评，不做推荐，只作查阅用的底稿。
+      一个抽屉，不是书单。这里陆续放我整理过的各种东西：作者与作品、清单与模板、工具与线索、
+      读到哪里记到哪里的零碎资料。不写书评，也不替谁背书，只把东西放整齐，标好来源与更新时间，
+      方便自己和路过的人查阅。
+    </p>
+    <p class="lead" style="font-size:13.5px;color:var(--muted);margin-bottom:0">
+      东西会越来越多，页面按最近更新排；找不全就直接问我。
     </p>
   </section>
 
@@ -52,27 +57,28 @@
         放不下的，给一个<strong>外部链接</strong>（网盘或文档站），页面只做索引，不保证长期可用。
       </div>
       <div class="note">
-        <b>只放什么</b><br>
-        本人整理的年表、目录、读书摘记，以及公开授权或已进入公有领域的资料。
-        他人作品的全文、扫描件不上传，见<a href="../rules/">站规</a>。
+        <b>收什么，不收什么</b><br>
+        收：本人整理的笔记、清单、模板、年表，以及公有领域或明确允许转载的资料、公开页面的索引。<br>
+        不收：他人作品的全文、扫描件、录音、付费课程与软件，见<a href="../rules/">站规</a>。
       </div>
     </div>
   </section>
 
   <section class="block" style="padding-top:10px">
     <h2 class="sec">已收录 <small id="count"></small></h2>
-    <div id="author-list"></div>
+    <div id="item-list"></div>
     <noscript>
-      <p class="note">列表需要 JavaScript 才能显示；资料条目写在页面源码的 <code>AUTHORS</code> 里。</p>
+      <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>ITEMS</code> 里。</p>
     </noscript>
 
     <div class="note" style="margin-top:22px">
-      <b>发现错漏或链接失效？</b>写信到
-      <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>，注明是哪一位作者、哪一条，
+      <b>发现错漏、链接失效，或想要哪类资料？</b>写信到
+      <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>，注明是哪一条、什么问题，
       我会核对后更正，并在这里留一句修改说明。
     </div>
   </section>
-<nav class="backbar" aria-label="返回">
+
+  <nav class="backbar" aria-label="返回">
     <a class="btn" href="../">← 返回 首页</a>
   </nav>
 </main>
@@ -88,50 +94,70 @@
 </footer>
 
 <!--
-  ┌─ 怎么增加一位作者 ────────────────────────────────────
-  │ 1. 在下面 AUTHORS 数组里复制一段 { ... }, 改字段；
-  │ 2. files 里每一项：
-  │      站内文件：{ label:'年表.pdf', href:'files/nianbiao.pdf', note:'站内文件 · 1.2 MB' }
-  │      外部链接：{ label:'作品索引', href:'https://…', note:'外部链接' }
-  │ 3. 站内文件放到 library/files/ 目录，再 git push 即可。
-  │ 4. works 是作品清单，用顿号分隔的一行字符串就行。
+  ┌─ 怎么加一条 ─────────────────────────────────────────
+  │ 在 ITEMS 数组里复制一段 { ... }, 改字段即可。字段都可以只写一部分：
+  │   title  标题（必填）
+  │   kind   类型，例如：作者资料 / 清单 / 模板 / 工具 / 书目 / 笔记 / 线索
+  │   who    副标题，一句话说明是谁、是什么、从哪来（可留空）
+  │   desc   两三句话的介绍（可留空）
+  │   lines  键值对数组 [{ k:'作品', v:'…' }, { k:'版本', v:'…' }]（可省略）
+  │   files  链接数组，两种写法：
+  │            站内文件 { label:'年表.pdf', href:'files/nianbiao.pdf', note:'站内文件 · 1.2 MB' }
+  │            外部链接 { label:'作品索引', href:'https://…', note:'外部链接' }
+  │   updated 更新日期
+  │ 站内文件放到 library/files/ 目录，再 git push 即可。
   └──────────────────────────────────────────────────────
 -->
 <script>
-  var AUTHORS = [
+  var ITEMS = [
     {
-      name: '鲁迅',
-      years: '1881—1936',
-      who: '浙江绍兴 · 作家、思想家',
+      title: '鲁迅',
+      kind: '作者资料',
+      who: '1881—1936 · 浙江绍兴 · 作家、思想家',
       desc: '本名周树人。以小说与杂文立身，也做过古籍辑校与版画整理。读他的好处是句子短、判断硬，坏处是容易被当成口号引用。',
-      works: '《呐喊》《彷徨》《朝花夕拾》《野草》《中国小说史略》',
+      lines: [{ k: '作品', v: '《呐喊》《彷徨》《朝花夕拾》《野草》《中国小说史略》' }],
       files: [
         { label: '维基百科条目', href: 'https://zh.wikipedia.org/wiki/%E9%B2%81%E8%BF%85', note: '外部链接' }
       ],
       updated: '2026-11-21'
     },
     {
-      name: '王力',
-      years: '1900—1986',
-      who: '广西博白 · 语言学家',
+      title: '王力',
+      kind: '作者资料',
+      who: '1900—1986 · 广西博白 · 语言学家',
       desc: '中国现代语言学的奠基者之一。主编的《古代汉语》长期作为教材使用，讲词汇与语法时习惯先给例证再下判断，这一点对自学者很友好。',
-      works: '《古代汉语》（主编）《汉语史稿》《诗词格律》《中国语法理论》',
+      lines: [{ k: '作品', v: '《古代汉语》（主编）《汉语史稿》《诗词格律》《中国语法理论》' }],
       files: [
         { label: '维基百科条目', href: 'https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%8A%9B_(%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%AE%B6)', note: '外部链接' }
+      ],
+      updated: '2026-11-21'
+    },
+    {
+      title: '这个抽屉的使用说明',
+      kind: '说明',
+      who: '文件怎么放、条目怎么写',
+      desc: '想自己往里放东西时的格式约定：单文件建议不超过 20MB，超过就走外部链接；文件名用英文或拼音，不留空格。',
+      lines: [{ k: '位置', v: 'library/files/README.txt' }],
+      files: [
+        { label: 'README.txt', href: 'files/README.txt', note: '站内文件' }
       ],
       updated: '2026-11-21'
     }
   ];
 
   (function () {
-    var box = document.getElementById('author-list');
+    var box = document.getElementById('item-list');
     if (!box) return;
 
-    box.innerHTML = AUTHORS.map(function (a) {
-      var lines = '';
-      if (a.works) {
-        lines += '<div><span>作品</span><span>' + a.works + '</span></div>';
-      }
+    box.innerHTML = ITEMS.map(function (a) {
+      var kind = a.kind ? '<span class="tag">' + a.kind + '</span>' : '';
+      var who = a.who ? '<p class="who">' + a.who + '</p>' : '';
+      var desc = a.desc ? '<p class="desc">' + a.desc + '</p>' : '';
+      var lines = (a.lines && a.lines.length)
+        ? '<div class="lines">' + a.lines.map(function (l) {
+            return '<div><span>' + (l.k || '') + '</span><span>' + (l.v || '') + '</span></div>';
+          }).join('') + '</div>'
+        : '';
       var files = (a.files || []).map(function (f) {
         var ext = /^https?:/i.test(f.href);
         return '<a class="file' + (ext ? ' ext' : '') + '" href="' + f.href + '"' +
@@ -139,18 +165,16 @@
                f.label + '<em>' + (f.note || (ext ? '外部链接' : '站内文件')) + '</em></a>';
       }).join('');
 
-      return '<article class="author">' +
-        '<h3>' + a.name + '<span class="years">' + a.years + '</span></h3>' +
-        '<p class="who">' + a.who + '</p>' +
-        '<p class="desc">' + a.desc + '</p>' +
-        '<div class="lines">' + lines + '</div>' +
+      return '<article class="item">' +
+        '<div class="item-head"><h3>' + a.title + '</h3>' + kind + '</div>' +
+        who + desc + lines +
         (files ? '<div class="files">' + files + '</div>' : '') +
-        '<p class="upd">更新于 ' + a.updated + '</p>' +
+        (a.updated ? '<p class="upd">更新于 ' + a.updated + '</p>' : '') +
       '</article>';
     }).join('');
 
     var c = document.getElementById('count');
-    if (c) c.textContent = AUTHORS.length + ' 位';
+    if (c) c.textContent = ITEMS.length + ' 条';
   })();
 </script>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
