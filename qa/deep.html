@@ -40,7 +40,7 @@
     <h1 style="font-size:clamp(23px,4vw,31px)">深读｜认真回答</h1>
     <p class="lead">
       长一点、慢一点的那种。先讲清问题是什么、依据在哪、别人怎么说过，再给结论；
-      说错了就改，改了就留一句说明。
+      说错了就改，改了就留一句说明。我写的文章、经允许转载的、读者投来的长文，都放在这一栏。
     </p>
     <p class="lead" style="font-size:13.5px;color:var(--muted);margin-bottom:0">
       讨论在页面底部，整块一楼，不按单篇开帖。
@@ -52,17 +52,18 @@
       <div class="note">
         <b>适合放这里</b><br>
         成篇的阅读笔记、版本与考据、书目比较、方法复盘；有出处、能核对的长回答。
+        投稿的长文也收在这一栏，全文刊出，不跳外链。
       </div>
       <div class="note">
         <b>不适合</b><br>
         一句话感想、随手推荐、没有依据的断言——那些去
-        <a href="daily.html">「日常」板块</a>。
+        <a href="daily.html">「日常」板块</a>。要下载的文件去<a href="../library/">莲藏</a>。
       </div>
     </div>
   </section>
 
   <section class="block" style="padding-top:10px">
-    <h2 class="sec">文章 <small>按时间倒序</small></h2>
+    <h2 class="sec">文章 <small>原创 · 转载 · 投稿</small></h2>
     <ul class="plain" id="post-list"></ul>
     <noscript>
       <p class="note">列表需要 JavaScript 才能显示。也可以直接访问
@@ -75,7 +76,7 @@
     <h2>板块讨论</h2>
     <p class="hint">
       留言需登录 GitHub，公开发布，我会在发现不当内容时删除。
-      对内容有异议或涉及侵权，请写信到 13332430323@189.cn。
+      想投一篇长文，见<a href="../submit/">投稿说明</a>；对内容有异议或涉及侵权，请写信到 13332430323@189.cn。
     </p>
     <div id="giscus-mount" class="cbox"></div>
   </section>
@@ -96,30 +97,66 @@
 </footer>
 
 <script>
-  /* 新增文章：复制一行，改 t（标题）/ href（文件名）/ m（日期·类型·时长）/ tags，即可。
-     href 与本页同级（都在 qa/ 目录下），只写文件名。 */
+  /* 新增一条：复制一段，改字段即可。
+     kind  原创 / 转载 / 投稿（默认原创）
+     t     标题；m  日期 · 类型 · 时长；tags  标签
+     原创、转载：href 写文章路径（同目录只写文件名），by 为转载原作者
+     投稿：不写 href，写 by（署名）和 body（一个字符串一段，全文展示） */
   var POSTS = [
-    { t: '读书笔记该写给谁看：自己，还是假想的读者？',
+    { kind: '原创',
+      t: '读书笔记该写给谁看：自己，还是假想的读者？',
       href: '001-weishenme-yao-du-shu.html',
       m: '2026-11-18 · 随笔 · 约 4 分钟',
       tags: ['阅读方法', '笔记'] },
-    { t: '古文入门，先读《古文观止》还是先读选本？',
+    { kind: '原创',
+      t: '古文入门，先读《古文观止》还是先读选本？',
       href: '002-gu-wen-ru-men-shu-mu.html',
       m: '2026-11-12 · 提问 · 待补充回答',
       tags: ['古文', '书目'] }
+
+    // 转载示例：
+    // { kind: '转载', t: '标题', by: '原作者', m: '2026-11-06',
+    //   href: 'https://…', tags: ['古文'] }
+
+    // 投稿示例（全文展示，不放链接）：
+    // { kind: '投稿', t: '把《史记》当小说读的第一年', by: '林三',
+    //   m: '2026-11-19 · 约 6 分钟', tags: ['古文', '阅读方法'],
+    //   body: ['第一段……', '第二段……'] }
   ];
 
   (function () {
     var box = document.getElementById('post-list');
     if (!box) return;
+
+    var KLASS = { '原创': 'own', '转载': 'rep', '投稿': 'sub' };
+
     box.innerHTML = POSTS.map(function (p) {
+      var kind = p.kind || '原创';
       var tags = (p.tags || []).map(function (x) {
         return '<span class="tag">' + x + '</span>';
       }).join('');
+
+      /* 投稿：全文刊出，不放链接 */
+      if (kind === '投稿') {
+        var by = [p.by ? '文 / ' + p.by : '', p.m].filter(Boolean).join(' · ');
+        var body = (p.body || []).map(function (t) {
+          return '<p>' + t + '</p>';
+        }).join('');
+        return '<li class="plain-only"><article class="submission">' +
+          '<div class="sub-head"><h3>' + p.t + '</h3><span class="tag sub">投稿</span></div>' +
+          '<p class="byline">' + by + '</p>' +
+          '<div class="sub-body">' + body + '</div>' +
+          '<div class="foot">' + tags +
+            '<span class="upd">全文刊于本站 · 著作权归作者</span></div>' +
+        '</article></li>';
+      }
+
+      /* 原创 / 转载：导读 + 链接 */
+      var kindTag = '<span class="tag ' + (KLASS[kind] || 'own') + '">' + kind + '</span>';
       return '<li><a class="row" href="' + p.href + '">' +
              '<div class="t">' + p.t + '</div>' +
-             '<div class="m">' + p.m + '</div>' +
-             '<div class="tags">' + tags + '</div>' +
+             '<div class="m">' + p.m + (kind === '转载' && p.by ? ' · 原文：' + p.by : '') + '</div>' +
+             '<div class="tags">' + kindTag + tags + '</div>' +
              '</a></li>';
     }).join('');
   })();

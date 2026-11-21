@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>莲藏 · 文章与索引 | 莲渡文汇</title>
-<meta name="description" content="莲渡文汇「莲藏」：我发在站外的文章（知乎、公众号、百家号等）与作者资料索引。资源文件一律不放站内，统一在网盘。">
+<title>莲藏 · 我上传的资料 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「莲藏」：站主自己扫描、整理、上传的资料，网盘链接与提取码集中在这里。文章与投稿在莲叙。">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -38,62 +38,48 @@
 
   <section class="hero" style="padding:44px 0 24px">
     <p class="kicker">莲 藏</p>
-    <h1 style="font-size:clamp(23px,4vw,31px)">文章与索引</h1>
+    <h1 style="font-size:clamp(23px,4vw,31px)">我上传的资料</h1>
     <p class="lead">
-      这里收两样东西：我发在别处的文章，和整理过的作者资料。文章只放标题、几句摘要和原文链接，
-      全文留在原来的平台——那边有完整的图和评论，也不必让同一段字在三个地方各改一遍。
+      这一页只放我自己扫描、整理、汇总之后上传的东西。文件都放在网盘，本站不存文件本体，
+      只登记名字、简介和链接——点开就跳走，提取码直接写在条目里。
     </p>
     <p class="lead" style="font-size:13.5px;color:var(--muted);margin-bottom:0">
-      需要下载的文件不放在这里，全部集中在<a href="drawer.html">「抽屉」</a>。
+      要看文章和投稿，去<a href="../qa/">莲叙</a>；这一页只管能下载的东西。
     </p>
   </section>
 
   <section class="block" style="padding-top:0;border-top:none">
     <div class="two-col">
       <div class="note">
-        <b>文章在哪</b><br>
-        站外的（知乎、公众号、百家号等）给原文链接，点开跳转过去；
-        站内的长文直接给页面地址。两边都标清发表时间与平台。
+        <b>怎么拿</b><br>
+        点条目的按钮进网盘，提取码在按钮后面，选中就能复制。链接失效、文件损坏，
+        写信到 <a href="mailto:13332430323@189.cn">13332430323@189.cn</a> 说一声，我重新传。
       </div>
       <div class="note">
-        <b>不放在这的</b><br>
-        电子书、扫描件、合集、模板等文件——站内不存任何文件，
-        这类东西一律走网盘，登记在<a href="drawer.html">「抽屉」</a>，见<a href="../rules/">站规</a>。
+        <b>放什么</b><br>
+        我自己做的年表、目录、摘记、整理稿，以及我确认可以分享的内容。
+        <strong>站内一个文件都不存</strong>；他人作品的全文、扫描件、付费课程不放，见<a href="../rules/">站规</a>。
       </div>
     </div>
   </section>
 
   <section class="block" style="padding-top:10px">
-    <a class="pin" href="drawer.html">
-      <span class="pin-badge">置顶</span>
-      <div class="pin-body">
-        <h3>抽屉｜我自己上传的资料</h3>
-        <p>要下载的东西都在那一页：我扫描、整理、上传后放网盘的文件，链接与提取码一起列，失效来信我重传。</p>
-      </div>
-      <span class="pin-go">进入 →</span>
-    </a>
-
-    <h2 class="sec" style="margin-top:30px">文章 <small>我发在别处的</small></h2>
-    <ul class="plain" id="post-list"></ul>
+    <h2 class="sec">已上传 <small id="count"></small></h2>
+    <div id="file-list"></div>
     <noscript>
-      <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>POSTS</code> 里。</p>
-    </noscript>
-
-    <h2 class="sec" style="margin-top:36px">索引 <small>作者与线索</small></h2>
-    <div id="item-list"></div>
-    <noscript>
-      <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>ITEMS</code> 里。</p>
+      <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>FILES</code> 里。</p>
     </noscript>
 
     <div class="note" style="margin-top:22px">
-      <b>发现错漏、链接失效，或想要哪类资料？</b>写信到
-      <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>，注明是哪一条、什么问题，
-      我会核对后更正，并在这里留一句修改说明。
+      <b>没找到想要的，或者链接失效？</b>写信到
+      <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>，说清要哪一份，
+      我先紧着你要的那份做。
     </div>
   </section>
 
   <nav class="backbar" aria-label="返回">
     <a class="btn" href="../">← 返回 首页</a>
+    <a class="btn" href="../qa/">去 莲叙 看文章</a>
   </nav>
 </main>
 
@@ -108,107 +94,67 @@
 </footer>
 
 <!--
-  ┌─ 怎么加一条 ─────────────────────────────────────────
-  │ 一、文章（发在知乎 / 公众号 / 百家号，或本站长文）→ POSTS 数组：
-  │     { title:'标题', platform:'知乎', date:'2026-11-18',
-  │       desc:'一两句摘要', href:'https://…' }
-  │     本站文章 href 写相对路径，例如 '../qa/001-xxx.html'
-  │
-  │ 二、索引类（作者资料、书目、线索）→ ITEMS 数组，字段都可选写：
-  │     { title, kind, who, desc,
-  │       lines:[{k:'作品', v:'…'}],
-  │       files:[{label:'维基条目', href:'https://…', note:'外部链接'}],
-  │       updated }
-  │
-  │ 三、文件不放进仓库。要放文件，去 library/drawer.html 登记网盘链接。
+  ┌─ 怎么加一份 ─────────────────────────────────────────
+  │ 在 FILES 数组里复制一段 { ... }，改字段：
+  │   title    名字（必填）
+  │   desc     一两句说明，里面有什么
+  │   platform 网盘名，例如：百度网盘 / 阿里云盘 / 天翼云盘 / 夸克
+  │   link     分享链接（必填）
+  │   code     提取码；没有就写 ''
+  │   size     文件大小，例如：120 MB / 3 个文件
+  │   updated  更新日期
+  │ 加完 git push，约一分钟生效。站内不放文件本体，只放链接。
   └──────────────────────────────────────────────────────
 -->
 <script>
-  /* ---------- 文章 ---------- */
-  var POSTS = [
+  var FILES = [
     // 示例（删掉换成你自己的）：
-    // { title: '为什么要在三十岁重读古文',
-    //   platform: '知乎', date: '2026-11-10',
-    //   desc: '一篇三千字的自述，讲我怎么从背不下来走到愿意慢慢读。',
-    //   href: 'https://zhuanlan.zhihu.com/p/xxxxxxxx' }
-  ];
-
-  /* ---------- 索引 ---------- */
-  var ITEMS = [
-    {
-      title: '鲁迅',
-      kind: '作者资料',
-      who: '1881—1936 · 浙江绍兴 · 作家、思想家',
-      desc: '本名周树人。以小说与杂文立身，也做过古籍辑校与版画整理。读他的好处是句子短、判断硬，坏处是容易被当成口号引用。',
-      lines: [{ k: '作品', v: '《呐喊》《彷徨》《朝花夕拾》《野草》《中国小说史略》' }],
-      files: [
-        { label: '维基百科条目', href: 'https://zh.wikipedia.org/wiki/%E9%B2%81%E8%BF%85', note: '外部链接' }
-      ],
-      updated: '2026-11-21'
-    },
-    {
-      title: '王力',
-      kind: '作者资料',
-      who: '1900—1986 · 广西博白 · 语言学家',
-      desc: '中国现代语言学的奠基者之一。主编的《古代汉语》长期作为教材使用，讲词汇与语法时习惯先给例证再下判断，这一点对自学者很友好。',
-      lines: [{ k: '作品', v: '《古代汉语》（主编）《汉语史稿》《诗词格律》《中国语法理论》' }],
-      files: [
-        { label: '维基百科条目', href: 'https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%8A%9B_(%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%AE%B6)', note: '外部链接' }
-      ],
-      updated: '2026-11-21'
-    }
+    // {
+    //   title: '读书笔记模板（A5 方格本版）',
+    //   desc: '我自己用的三栏格式，打印后裁成 A5 贴在方格本上。含一页填写示例。',
+    //   platform: '百度网盘',
+    //   link: 'https://pan.baidu.com/s/xxxxxxxx',
+    //   code: 'ab12',
+    //   size: '1.2 MB',
+    //   updated: '2026-11-21'
+    // }
   ];
 
   (function () {
-    /* 文章列表 */
-    var pl = document.getElementById('post-list');
-    if (pl) {
-      if (!POSTS.length) {
-        pl.innerHTML = '<li><div class="note" style="margin:14px 0">' +
-          '<b>站外的旧文还没收进来。</b><br>' +
-          '发在知乎、公众号、百家号的那些，之后会把标题和原文链接补在这里；' +
-          '现在想看我写的，先翻<a href="../qa/">莲叙</a>。</div></li>';
-      } else {
-        pl.innerHTML = POSTS.map(function (p) {
-          var ext = /^https?:/i.test(p.href || '');
-          return '<li><a class="row" href="' + p.href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
-            '<div class="t">' + p.title + '</div>' +
-            '<div class="m">' + [p.date, p.platform].filter(Boolean).join(' · ') + '</div>' +
-            (p.desc ? '<div class="m" style="color:var(--ink-soft)">' + p.desc + '</div>' : '') +
-            '<div class="tags">' +
-              (p.platform ? '<span class="tag">' + p.platform + '</span>' : '') +
-              (ext ? '<span class="tag ch">站外</span>' : '<span class="tag">站内</span>') +
-            '</div>' +
-          '</a></li>';
-        }).join('');
-      }
-    }
-
-    /* 索引列表 */
-    var box = document.getElementById('item-list');
+    var box = document.getElementById('file-list');
+    var c = document.getElementById('count');
     if (!box) return;
 
-    box.innerHTML = ITEMS.map(function (a) {
-      var kind = a.kind ? '<span class="tag">' + a.kind + '</span>' : '';
-      var who = a.who ? '<p class="who">' + a.who + '</p>' : '';
-      var desc = a.desc ? '<p class="desc">' + a.desc + '</p>' : '';
-      var lines = (a.lines && a.lines.length)
-        ? '<div class="lines">' + a.lines.map(function (l) {
-            return '<div><span>' + (l.k || '') + '</span><span>' + (l.v || '') + '</span></div>';
-          }).join('') + '</div>'
-        : '';
-      var files = (a.files || []).map(function (f) {
-        var ext = /^https?:/i.test(f.href);
-        return '<a class="file' + (ext ? ' ext' : '') + '" href="' + f.href + '"' +
-               (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
-               f.label + '<em>' + (f.note || (ext ? '外部链接' : '站内')) + '</em></a>';
-      }).join('');
+    if (!FILES.length) {
+      if (c) c.textContent = '0 份';
+      box.innerHTML =
+        '<div class="note"><b>还空着。</b><br>' +
+        '材料还在整理，做好一份就挂一份，不凑数。如果你在等某一份，' +
+        '可以写信到 <a href="mailto:13332430323@189.cn">13332430323@189.cn</a> 说一声，' +
+        '我先紧着你要的那份做。</div>';
+      return;
+    }
+
+    if (c) c.textContent = FILES.length + ' 份';
+
+    box.innerHTML = FILES.map(function (f) {
+      var lines = [];
+      if (f.platform) lines.push({ k: '位置', v: f.platform });
+      if (f.size) lines.push({ k: '大小', v: f.size });
+      if (f.code) lines.push({ k: '提取码', v: '<code>' + f.code + '</code>' });
 
       return '<article class="item">' +
-        '<div class="item-head"><h3>' + a.title + '</h3>' + kind + '</div>' +
-        who + desc + lines +
-        (files ? '<div class="files">' + files + '</div>' : '') +
-        (a.updated ? '<p class="upd">更新于 ' + a.updated + '</p>' : '') +
+        '<div class="item-head"><h3>' + f.title + '</h3><span class="tag">网盘</span></div>' +
+        (f.desc ? '<p class="desc">' + f.desc + '</p>' : '') +
+        (lines.length ? '<div class="lines">' + lines.map(function (l) {
+          return '<div><span>' + l.k + '</span><span>' + l.v + '</span></div>';
+        }).join('') + '</div>' : '') +
+        (f.link ? '<div class="files"><a class="file ext" href="' + f.link + '" target="_blank" rel="noopener">' +
+          '打开网盘<em>' + (f.platform || '外部链接') + '</em></a>' +
+          (f.code ? '<a class="file" href="' + f.link + '" target="_blank" rel="noopener">' +
+            '提取码 ' + f.code + '<em>点这里也能进</em></a>' : '') +
+          '</div>' : '') +
+        (f.updated ? '<p class="upd">更新于 ' + f.updated + '</p>' : '') +
       '</article>';
     }).join('');
   })();

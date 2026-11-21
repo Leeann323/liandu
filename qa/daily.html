@@ -40,7 +40,7 @@
     <h1 style="font-size:clamp(23px,4vw,31px)">日常｜随手种草</h1>
     <p class="lead">
       短句、一句话推荐、今天觉得好用的东西。不做测评、不接推广、没有购买链接，
-      只有「我自己在用」和「好在哪一句」。
+      只有「我自己在用」和「好在哪一句」。投稿的短评也放在这里，标出署名。
     </p>
   </section>
 
@@ -53,7 +53,7 @@
       <div class="note">
         <b>不适合</b><br>
         长论证、版本考据、需要出处的判断——那些去
-        <a href="deep.html">「深读」板块</a>。
+        <a href="deep.html">「深读」板块</a>。要下载的文件去<a href="../library/">莲藏</a>。
       </div>
     </div>
   </section>
@@ -70,7 +70,7 @@
     <h2>板块讨论</h2>
     <p class="hint">
       留言需登录 GitHub，公开发布，我会在发现不当内容时删除。
-      对内容有异议或涉及侵权，请写信到 13332430323@189.cn。
+      想投一条短评，见<a href="../submit/">投稿说明</a>；对内容有异议或涉及侵权，请写信到 13332430323@189.cn。
     </p>
     <div id="giscus-mount" class="cbox"></div>
   </section>
@@ -91,8 +91,9 @@
 </footer>
 
 <script>
-  /* 新增一条：复制一段，改 t（标题）/ p（一两句话）/ m（日期）/ tags 即可。
-     可选 img: '图片地址'（放在 ../assets/img/ 下），可选 href: '详情页文件名'。 */
+  /* 新增一条：复制一段，改 t / p / m / tags 即可。
+     可选 img: '图片地址'（放在 ../assets/img/ 下），可选 href: '详情页路径'。
+     投稿的短评：写 kind: '投稿' 与 by: '署名'，页面上会自动标出「投稿」。 */
   var NOTES = [
     { t: '手机调成灰度',
       p: '晚上刷手机的欲望直接降了一半。不是为了自律，纯粹是黑白的东西没那么好看。',
@@ -112,14 +113,18 @@
     var box = document.getElementById('note-list');
     if (!box) return;
     box.innerHTML = NOTES.map(function (n) {
+      var isSub = (n.kind === '投稿');
+      var kindTag = isSub ? '<span class="tag sub">投稿</span>' : '';
       var tags = (n.tags || []).map(function (x) {
         return '<span class="tag">' + x + '</span>';
       }).join('');
       var img = n.img ? '<img src="' + n.img + '" alt="" loading="lazy">' : '';
       var body = '<h3>' + n.t + '</h3>' + img + '<p>' + n.p + '</p>';
+      var meta = '<div class="meta">' + kindTag + tags +
+        '<span>' + (isSub && n.by ? '文 / ' + n.by + ' · ' + n.m : n.m) + '</span></div>';
       var card = n.href
-        ? '<a class="note-card" href="' + n.href + '">' + body + '<div class="meta">' + tags + '<span>' + n.m + '</span></div></a>'
-        : '<div class="note-card">' + body + '<div class="meta">' + tags + '<span>' + n.m + '</span></div></div>';
+        ? '<a class="note-card" href="' + n.href + '">' + body + meta + '</a>'
+        : '<div class="note-card">' + body + meta + '</div>';
       return card;
     }).join('');
   })();
