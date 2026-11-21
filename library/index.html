@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>莲藏 · 素材存档 | 莲渡文汇</title>
-<meta name="description" content="莲渡文汇「莲藏」：陆续整理的各类资料存档——作者与作品、清单与模板、工具与线索。">
+<title>莲藏 · 文章与索引 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「莲藏」：我发在站外的文章（知乎、公众号、百家号等）与作者资料索引。资源文件一律不放站内，统一在网盘。">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -38,28 +38,27 @@
 
   <section class="hero" style="padding:44px 0 24px">
     <p class="kicker">莲 藏</p>
-    <h1 style="font-size:clamp(23px,4vw,31px)">素材存档</h1>
+    <h1 style="font-size:clamp(23px,4vw,31px)">文章与索引</h1>
     <p class="lead">
-      一个抽屉，不是书单。这里陆续放我整理过的各种东西：作者与作品、清单与模板、工具与线索、
-      读到哪里记到哪里的零碎资料。不写书评，也不替谁背书，只把东西放整齐，标好来源与更新时间，
-      方便自己和路过的人查阅。
+      这里收两样东西：我发在别处的文章，和整理过的作者资料。文章只放标题、几句摘要和原文链接，
+      全文留在原来的平台——那边有完整的图和评论，也不必让同一段字在三个地方各改一遍。
     </p>
     <p class="lead" style="font-size:13.5px;color:var(--muted);margin-bottom:0">
-      东西会越来越多，页面按最近更新排；找不全就直接问我。
+      需要下载的文件不放在这里，全部集中在<a href="drawer.html">「抽屉」</a>。
     </p>
   </section>
 
   <section class="block" style="padding-top:0;border-top:none">
     <div class="two-col">
       <div class="note">
-        <b>文件放哪</b><br>
-        小文件可以直接放进仓库（<code>library/files/</code>，单个建议不超过 20MB）；
-        大文件、成套的东西走网盘，统一登记在<a href="drawer.html">「抽屉」</a>那一页。
+        <b>文章在哪</b><br>
+        站外的（知乎、公众号、百家号等）给原文链接，点开跳转过去；
+        站内的长文直接给页面地址。两边都标清发表时间与平台。
       </div>
       <div class="note">
-        <b>收什么，不收什么</b><br>
-        收：本人整理的笔记、清单、模板、年表，以及公有领域或明确允许转载的资料、公开页面的索引。<br>
-        不收：他人作品的全文、扫描件、录音、付费课程与软件，见<a href="../rules/">站规</a>。
+        <b>不放在这的</b><br>
+        电子书、扫描件、合集、模板等文件——站内不存任何文件，
+        这类东西一律走网盘，登记在<a href="drawer.html">「抽屉」</a>，见<a href="../rules/">站规</a>。
       </div>
     </div>
   </section>
@@ -69,12 +68,18 @@
       <span class="pin-badge">置顶</span>
       <div class="pin-body">
         <h3>抽屉｜我自己上传的资料</h3>
-        <p>我扫描、整理、上传的东西都在这一页。文件放在网盘，本站不存本体，链接与提取码一起列，失效来信我重传。</p>
+        <p>要下载的东西都在那一页：我扫描、整理、上传后放网盘的文件，链接与提取码一起列，失效来信我重传。</p>
       </div>
       <span class="pin-go">进入 →</span>
     </a>
 
-    <h2 class="sec" style="margin-top:26px">已收录 <small id="count"></small></h2>
+    <h2 class="sec" style="margin-top:30px">文章 <small>我发在别处的</small></h2>
+    <ul class="plain" id="post-list"></ul>
+    <noscript>
+      <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>POSTS</code> 里。</p>
+    </noscript>
+
+    <h2 class="sec" style="margin-top:36px">索引 <small>作者与线索</small></h2>
     <div id="item-list"></div>
     <noscript>
       <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>ITEMS</code> 里。</p>
@@ -104,20 +109,31 @@
 
 <!--
   ┌─ 怎么加一条 ─────────────────────────────────────────
-  │ 在 ITEMS 数组里复制一段 { ... }, 改字段即可。字段都可以只写一部分：
-  │   title  标题（必填）
-  │   kind   类型，例如：作者资料 / 清单 / 模板 / 工具 / 书目 / 笔记 / 线索
-  │   who    副标题，一句话说明是谁、是什么、从哪来（可留空）
-  │   desc   两三句话的介绍（可留空）
-  │   lines  键值对数组 [{ k:'作品', v:'…' }, { k:'版本', v:'…' }]（可省略）
-  │   files  链接数组，两种写法：
-  │            站内文件 { label:'年表.pdf', href:'files/nianbiao.pdf', note:'站内文件 · 1.2 MB' }
-  │            外部链接 { label:'作品索引', href:'https://…', note:'外部链接' }
-  │   updated 更新日期
-  │ 站内文件放到 library/files/ 目录，再 git push 即可。
+  │ 一、文章（发在知乎 / 公众号 / 百家号，或本站长文）→ POSTS 数组：
+  │     { title:'标题', platform:'知乎', date:'2026-11-18',
+  │       desc:'一两句摘要', href:'https://…' }
+  │     本站文章 href 写相对路径，例如 '../qa/001-xxx.html'
+  │
+  │ 二、索引类（作者资料、书目、线索）→ ITEMS 数组，字段都可选写：
+  │     { title, kind, who, desc,
+  │       lines:[{k:'作品', v:'…'}],
+  │       files:[{label:'维基条目', href:'https://…', note:'外部链接'}],
+  │       updated }
+  │
+  │ 三、文件不放进仓库。要放文件，去 library/drawer.html 登记网盘链接。
   └──────────────────────────────────────────────────────
 -->
 <script>
+  /* ---------- 文章 ---------- */
+  var POSTS = [
+    // 示例（删掉换成你自己的）：
+    // { title: '为什么要在三十岁重读古文',
+    //   platform: '知乎', date: '2026-11-10',
+    //   desc: '一篇三千字的自述，讲我怎么从背不下来走到愿意慢慢读。',
+    //   href: 'https://zhuanlan.zhihu.com/p/xxxxxxxx' }
+  ];
+
+  /* ---------- 索引 ---------- */
   var ITEMS = [
     {
       title: '鲁迅',
@@ -144,6 +160,31 @@
   ];
 
   (function () {
+    /* 文章列表 */
+    var pl = document.getElementById('post-list');
+    if (pl) {
+      if (!POSTS.length) {
+        pl.innerHTML = '<li><div class="note" style="margin:14px 0">' +
+          '<b>站外的旧文还没收进来。</b><br>' +
+          '发在知乎、公众号、百家号的那些，之后会把标题和原文链接补在这里；' +
+          '现在想看我写的，先翻<a href="../qa/">莲叙</a>。</div></li>';
+      } else {
+        pl.innerHTML = POSTS.map(function (p) {
+          var ext = /^https?:/i.test(p.href || '');
+          return '<li><a class="row" href="' + p.href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
+            '<div class="t">' + p.title + '</div>' +
+            '<div class="m">' + [p.date, p.platform].filter(Boolean).join(' · ') + '</div>' +
+            (p.desc ? '<div class="m" style="color:var(--ink-soft)">' + p.desc + '</div>' : '') +
+            '<div class="tags">' +
+              (p.platform ? '<span class="tag">' + p.platform + '</span>' : '') +
+              (ext ? '<span class="tag ch">站外</span>' : '<span class="tag">站内</span>') +
+            '</div>' +
+          '</a></li>';
+        }).join('');
+      }
+    }
+
+    /* 索引列表 */
     var box = document.getElementById('item-list');
     if (!box) return;
 
@@ -160,7 +201,7 @@
         var ext = /^https?:/i.test(f.href);
         return '<a class="file' + (ext ? ' ext' : '') + '" href="' + f.href + '"' +
                (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
-               f.label + '<em>' + (f.note || (ext ? '外部链接' : '站内文件')) + '</em></a>';
+               f.label + '<em>' + (f.note || (ext ? '外部链接' : '站内')) + '</em></a>';
       }).join('');
 
       return '<article class="item">' +
@@ -170,9 +211,6 @@
         (a.updated ? '<p class="upd">更新于 ' + a.updated + '</p>' : '') +
       '</article>';
     }).join('');
-
-    var c = document.getElementById('count');
-    if (c) c.textContent = ITEMS.length + ' 条';
   })();
 </script>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
