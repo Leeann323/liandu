@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日常 · 随手种草 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「日常」板块：短句、随手推荐、今天觉得好用的东西。不测评、不接推广。">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 5c3 5 3 10 0 14-3-4-3-9 0-14z" fill="#5f8f8a"/>
+        <path d="M16 19c-5-1-9-5-10-10 5 .5 8.5 4 10 10z" fill="#5f8f8a" opacity=".75"/>
+        <path d="M16 19c5-1 9-5 10-10-5 .5-8.5 4-10 10z" fill="#5f8f8a" opacity=".75"/>
+      </svg>
+      <span style="display:flex;flex-direction:column;line-height:1.25">
+        <b>莲渡文汇</b><span>LIAN DU WEN HUI</span>
+      </span>
+    </a>
+    <nav class="main">
+      <a href="../">首页</a>
+      <a class="on" href="../qa/">莲叙</a>
+      <a href="../library/">莲藏</a>
+      <a href="../submit/">投稿</a>
+      <a href="../about/">关于</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" style="padding:52px 0 24px">
+    <p class="kicker">莲 叙 · 其 二</p>
+    <h1 style="font-size:clamp(23px,4vw,31px)">日常｜随手种草</h1>
+    <p class="lead">
+      短句、一句话推荐、今天觉得好用的东西。不做测评、不接推广、没有购买链接，
+      只有「我自己在用」和「好在哪一句」。
+    </p>
+  </section>
+
+  <section class="block" style="padding-top:0;border-top:none">
+    <div class="two-col">
+      <div class="note">
+        <b>适合放这里</b><br>
+        一本翻得动的书、一个顺手的习惯、一支好写的笔、一段听着舒服的录音；一两句说清就够。
+      </div>
+      <div class="note">
+        <b>不适合</b><br>
+        长论证、版本考据、需要出处的判断——那些去
+        <a href="deep.html">「深读」板块</a>。
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:10px">
+    <h2 class="sec">随手记 <small>按时间倒序</small></h2>
+    <div class="note-grid" id="note-list"></div>
+    <noscript>
+      <p class="note">列表需要 JavaScript 才能显示。</p>
+    </noscript>
+  </section>
+
+  <section class="comments">
+    <h2>板块讨论</h2>
+    <p class="hint">
+      留言需登录 GitHub，公开发布，我会在发现不当内容时删除。
+      对内容有异议或涉及侵权，请写信到 13332430323@189.cn。
+    </p>
+    <div id="giscus-mount" class="cbox"></div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="y">2026</span> 莲渡文汇</span>
+    <span class="sep">·</span>
+    <a href="../rules/">站规与版权说明</a>
+    <span class="sep">·</span>
+    <a href="../about/">关于本站</a>
+  </div>
+</footer>
+
+<script>
+  /* 新增一条：复制一段，改 t（标题）/ p（一两句话）/ m（日期）/ tags 即可。
+     可选 img: '图片地址'（放在 ../assets/img/ 下），可选 href: '详情页文件名'。 */
+  var NOTES = [
+    { t: '手机调成灰度',
+      p: '晚上刷手机的欲望直接降了一半。不是为了自律，纯粹是黑白的东西没那么好看。',
+      m: '2026-11-20', tags: ['习惯'] },
+    { t: 'A5 方格本，一页只写一件事',
+      p: '大本子我总想「一次记全」，最后什么都没记全。小本子反而翻得快，回头找得到。',
+      m: '2026-11-17', tags: ['笔记', '文具'] },
+    { t: '把《庄子》当有声书听',
+      p: '通勤路上听，比坐着读更进得去。可能是节奏慢，脑子有空跟着走。',
+      m: '2026-11-14', tags: ['古文', '听书'] },
+    { t: '在扉页写一行「为什么读它」',
+      p: '读完当场写，别等。半年后翻开，那行字比整本笔记都准。',
+      m: '2026-11-09', tags: ['阅读方法'] }
+  ];
+
+  (function () {
+    var box = document.getElementById('note-list');
+    if (!box) return;
+    box.innerHTML = NOTES.map(function (n) {
+      var tags = (n.tags || []).map(function (x) {
+        return '<span class="tag">' + x + '</span>';
+      }).join('');
+      var img = n.img ? '<img src="' + n.img + '" alt="" loading="lazy">' : '';
+      var body = '<h3>' + n.t + '</h3>' + img + '<p>' + n.p + '</p>';
+      var card = n.href
+        ? '<a class="note-card" href="' + n.href + '">' + body + '<div class="meta">' + tags + '<span>' + n.m + '</span></div></a>'
+        : '<div class="note-card">' + body + '<div class="meta">' + tags + '<span>' + n.m + '</span></div></div>';
+      return card;
+    }).join('');
+  })();
+</script>
+<script src="../assets/giscus.js"></script>
+<script src="../assets/comments.js"></script>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

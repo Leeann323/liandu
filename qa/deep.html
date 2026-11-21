@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>深读 · 认真回答 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「深读」板块：成篇的阅读笔记、版本与考据、书目比较，以及有人认真回答的问题。">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 5c3 5 3 10 0 14-3-4-3-9 0-14z" fill="#5f8f8a"/>
+        <path d="M16 19c-5-1-9-5-10-10 5 .5 8.5 4 10 10z" fill="#5f8f8a" opacity=".75"/>
+        <path d="M16 19c5-1 9-5 10-10-5 .5-8.5 4-10 10z" fill="#5f8f8a" opacity=".75"/>
+      </svg>
+      <span style="display:flex;flex-direction:column;line-height:1.25">
+        <b>莲渡文汇</b><span>LIAN DU WEN HUI</span>
+      </span>
+    </a>
+    <nav class="main">
+      <a href="../">首页</a>
+      <a class="on" href="../qa/">莲叙</a>
+      <a href="../library/">莲藏</a>
+      <a href="../submit/">投稿</a>
+      <a href="../about/">关于</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" style="padding:52px 0 24px">
+    <p class="kicker">莲 叙 · 其 一</p>
+    <h1 style="font-size:clamp(23px,4vw,31px)">深读｜认真回答</h1>
+    <p class="lead">
+      长一点、慢一点的那种。先讲清问题是什么、依据在哪、别人怎么说过，再给结论；
+      说错了就改，改了就留一句说明。
+    </p>
+    <p class="lead" style="font-size:13.5px;color:var(--muted);margin-bottom:0">
+      讨论在页面底部，整块一楼，不按单篇开帖。
+    </p>
+  </section>
+
+  <section class="block" style="padding-top:0;border-top:none">
+    <div class="two-col">
+      <div class="note">
+        <b>适合放这里</b><br>
+        成篇的阅读笔记、版本与考据、书目比较、方法复盘；有出处、能核对的长回答。
+      </div>
+      <div class="note">
+        <b>不适合</b><br>
+        一句话感想、随手推荐、没有依据的断言——那些去
+        <a href="daily.html">「日常」板块</a>。
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:10px">
+    <h2 class="sec">文章 <small>按时间倒序</small></h2>
+    <ul class="plain" id="post-list"></ul>
+    <noscript>
+      <p class="note">列表需要 JavaScript 才能显示。也可以直接访问
+        <a href="001-weishenme-yao-du-shu.html">第一篇</a>、
+        <a href="002-gu-wen-ru-men-shu-mu.html">第二篇</a>。</p>
+    </noscript>
+  </section>
+
+  <section class="comments">
+    <h2>板块讨论</h2>
+    <p class="hint">
+      留言需登录 GitHub，公开发布，我会在发现不当内容时删除。
+      对内容有异议或涉及侵权，请写信到 13332430323@189.cn。
+    </p>
+    <div id="giscus-mount" class="cbox"></div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="y">2026</span> 莲渡文汇</span>
+    <span class="sep">·</span>
+    <a href="../rules/">站规与版权说明</a>
+    <span class="sep">·</span>
+    <a href="../about/">关于本站</a>
+  </div>
+</footer>
+
+<script>
+  /* 新增文章：复制一行，改 t（标题）/ href（文件名）/ m（日期·类型·时长）/ tags，即可。
+     href 与本页同级（都在 qa/ 目录下），只写文件名。 */
+  var POSTS = [
+    { t: '读书笔记该写给谁看：自己，还是假想的读者？',
+      href: '001-weishenme-yao-du-shu.html',
+      m: '2026-11-18 · 随笔 · 约 4 分钟',
+      tags: ['阅读方法', '笔记'] },
+    { t: '古文入门，先读《古文观止》还是先读选本？',
+      href: '002-gu-wen-ru-men-shu-mu.html',
+      m: '2026-11-12 · 提问 · 待补充回答',
+      tags: ['古文', '书目'] }
+  ];
+
+  (function () {
+    var box = document.getElementById('post-list');
+    if (!box) return;
+    box.innerHTML = POSTS.map(function (p) {
+      var tags = (p.tags || []).map(function (x) {
+        return '<span class="tag">' + x + '</span>';
+      }).join('');
+      return '<li><a class="row" href="' + p.href + '">' +
+             '<div class="t">' + p.t + '</div>' +
+             '<div class="m">' + p.m + '</div>' +
+             '<div class="tags">' + tags + '</div>' +
+             '</a></li>';
+    }).join('');
+  })();
+</script>
+<script src="../assets/giscus.js"></script>
+<script src="../assets/comments.js"></script>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

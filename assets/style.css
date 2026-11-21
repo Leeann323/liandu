@@ -175,3 +175,85 @@ footer.site .sep { opacity: .4; }
   nav.main { width: 100%; margin-left: 0; gap: 14px; }
   header.site .wrap { padding-bottom: 10px; }
 }
+
+/* ---------- 通用按钮 ---------- */
+a.btn {
+  display: inline-block; font-size: 13px; padding: 7px 15px; border-radius: 8px;
+  border: 1px solid var(--qing); color: var(--qing-deep); background: transparent;
+}
+a.btn:hover { background: var(--qing); color: #fff; text-decoration: none; }
+
+/* ---------- 两栏说明（板块页） ---------- */
+.two-col {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.two-col .note { height: 100%; }
+
+/* ---------- 日常卡片 ---------- */
+.note-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
+}
+.note-card {
+  display: flex; flex-direction: column; gap: 8px;
+  border: 1px solid var(--line); border-radius: 14px; background: #fff;
+  padding: 18px 18px 14px; box-shadow: var(--shadow);
+  color: inherit; text-decoration: none; transition: .2s ease;
+}
+a.note-card:hover { transform: translateY(-2px); border-color: #cfdcd9; text-decoration: none; }
+.note-card h3 {
+  font-family: var(--serif); font-size: 15.5px; font-weight: 600;
+  margin: 0; letter-spacing: .6px;
+}
+.note-card img {
+  width: 100%; height: auto; border-radius: 10px; display: block; margin: 2px 0;
+}
+.note-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.72; }
+.note-card .meta {
+  margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--line);
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  font-size: 11.5px; color: var(--muted);
+}
+.note-card .meta .tag { margin: 0; }
+
+/* ---------- 作者资料卡 ---------- */
+.author {
+  border: 1px solid var(--line); border-radius: 14px; background: #fff;
+  padding: 22px; box-shadow: var(--shadow); margin-bottom: 16px;
+}
+.author h3 {
+  font-family: var(--serif); font-size: 18px; font-weight: 600;
+  letter-spacing: 1.5px; margin: 0 0 3px;
+}
+.author h3 .years {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 400;
+  color: var(--muted); letter-spacing: 0; margin-left: 9px;
+}
+.author .who { font-size: 12.5px; color: var(--qing-deep); margin: 0 0 12px; }
+.author .desc { font-size: 14px; color: var(--ink-soft); margin: 0 0 14px; }
+.author .lines { border-top: 1px dashed var(--line); }
+.author .lines div {
+  display: flex; gap: 14px; padding: 9px 0; font-size: 13.5px;
+  border-bottom: 1px dashed var(--line);
+}
+.author .lines div span:first-child { color: var(--muted); min-width: 58px; flex: 0 0 auto; }
+.author .files { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 14px; }
+.author .file {
+  font-size: 13px; padding: 6px 13px; border-radius: 8px;
+  border: 1px solid var(--qing); color: var(--qing-deep); background: transparent;
+}
+.author .file em { font-style: normal; font-size: 11.5px; color: var(--muted); margin-left: 7px; }
+.author .file:hover { background: var(--qing); color: #fff; text-decoration: none; }
+.author .file:hover em { color: rgba(255, 255, 255, .82); }
+.author .upd { font-size: 11.5px; color: var(--muted); margin: 12px 0 0; }
+code {
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
+  font-size: .92em; background: rgba(120, 130, 140, .10);
+  padding: 1px 5px; border-radius: 4px;
+}
+
+@media (max-width: 560px) {
+  .author .lines div { flex-direction: column; gap: 2px; }
+  .author { padding: 18px; }
+}

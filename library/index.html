@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>莲藏 · 拾遗与索引 | 莲渡文汇</title>
-<meta name="description" content="莲渡文汇的资料索引：公开文档、工具与书目，标注来源与更新时间。">
+<title>莲藏 · 作者资料 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「莲藏」：作者资料存档——生平、身份、作品清单与相关线索。">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -32,53 +32,41 @@
 </header>
 
 <main class="wrap">
-  <section class="hero" style="padding:56px 0 24px">
+  <section class="hero" style="padding:52px 0 24px">
     <p class="kicker">莲 藏</p>
-    <h1 style="font-size:clamp(24px,4vw,32px)">拾遗与索引</h1>
+    <h1 style="font-size:clamp(23px,4vw,31px)">作者资料</h1>
     <p class="lead">
-      只收录<strong>公开可访问</strong>或<strong>我本人整理</strong>的内容。每条都标注来源与更新日期；
-      链接失效请<a href="../submit/">来信反馈</a>，我会在一周内处理。
+      目前只做一件事：把作者资料存下来。生平、身份、作品清单、相关线索，一条一位作者。
+      不写书评，不做推荐，只作查阅用的底稿。
     </p>
   </section>
 
-  <section class="block" style="padding-top:6px">
-    <div class="grid-3">
-
-      <div class="res">
-        <h3>中文排版规范速查</h3>
-        <p>标点、空格、引号、数字与单位的中文处理方式，做中文网页时的随手参照。自编，可直接引用。</p>
-        <div class="foot">
-          <span class="tag ch">站内直链</span>
-          <span>2026-11-16</span>
-          <a class="btn" href="#">打开</a>
-        </div>
+  <section class="block" style="padding-top:0;border-top:none">
+    <div class="two-col">
+      <div class="note">
+        <b>文件放哪</b><br>
+        能放进仓库的，放在 <code>library/files/</code> 下直接给站内地址（单个文件建议不超过 20MB）；
+        放不下的，给一个<strong>外部链接</strong>（网盘或文档站），页面只做索引，不保证长期可用。
       </div>
-
-      <div class="res">
-        <h3>公开书目索引</h3>
-        <p>按主题整理的公开书单与版本信息，只做索引与简介，不提供任何电子文件。</p>
-        <div class="foot">
-          <span class="tag gh">GitHub</span>
-          <span>2026-11-10</span>
-          <a class="btn" href="#">打开</a>
-        </div>
+      <div class="note">
+        <b>只放什么</b><br>
+        本人整理的年表、目录、读书摘记，以及公开授权或已进入公有领域的资料。
+        他人作品的全文、扫描件不上传，见<a href="../rules/">站规</a>。
       </div>
-
-      <div class="res">
-        <h3>本站视觉与模板</h3>
-        <p>这套页面的结构、配色与水墨莲 SVG，全部开源，可自行取用修改。</p>
-        <div class="foot">
-          <span class="tag gh">GitHub</span>
-          <span>2026-11-20</span>
-          <a class="btn" href="#">打开</a>
-        </div>
-      </div>
-
     </div>
+  </section>
 
-    <div class="note" style="margin-top:26px">
-      <b>关于版权：</b>本站不托管、不分发他人作品。所有外部链接仅作索引，版权归原作者所有；
-      若权利人认为某条索引不当，请<a href="../submit/">来信</a>，核实后立即移除，见<a href="../rules/">站规</a>。
+  <section class="block" style="padding-top:10px">
+    <h2 class="sec">已收录 <small id="count"></small></h2>
+    <div id="author-list"></div>
+    <noscript>
+      <p class="note">列表需要 JavaScript 才能显示；资料条目写在页面源码的 <code>AUTHORS</code> 里。</p>
+    </noscript>
+
+    <div class="note" style="margin-top:22px">
+      <b>发现错漏或链接失效？</b>写信到
+      <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>，注明是哪一位作者、哪一条，
+      我会核对后更正，并在这里留一句修改说明。
     </div>
   </section>
 </main>
@@ -92,6 +80,73 @@
     <a href="../about/">关于本站</a>
   </div>
 </footer>
+
+<!--
+  ┌─ 怎么增加一位作者 ────────────────────────────────────
+  │ 1. 在下面 AUTHORS 数组里复制一段 { ... }, 改字段；
+  │ 2. files 里每一项：
+  │      站内文件：{ label:'年表.pdf', href:'files/nianbiao.pdf', note:'站内文件 · 1.2 MB' }
+  │      外部链接：{ label:'作品索引', href:'https://…', note:'外部链接' }
+  │ 3. 站内文件放到 library/files/ 目录，再 git push 即可。
+  │ 4. works 是作品清单，用顿号分隔的一行字符串就行。
+  └──────────────────────────────────────────────────────
+-->
+<script>
+  var AUTHORS = [
+    {
+      name: '鲁迅',
+      years: '1881—1936',
+      who: '浙江绍兴 · 作家、思想家',
+      desc: '本名周树人。以小说与杂文立身，也做过古籍辑校与版画整理。读他的好处是句子短、判断硬，坏处是容易被当成口号引用。',
+      works: '《呐喊》《彷徨》《朝花夕拾》《野草》《中国小说史略》',
+      files: [
+        { label: '维基百科条目', href: 'https://zh.wikipedia.org/wiki/%E9%B2%81%E8%BF%85', note: '外部链接' }
+      ],
+      updated: '2026-11-21'
+    },
+    {
+      name: '王力',
+      years: '1900—1986',
+      who: '广西博白 · 语言学家',
+      desc: '中国现代语言学的奠基者之一。主编的《古代汉语》长期作为教材使用，讲词汇与语法时习惯先给例证再下判断，这一点对自学者很友好。',
+      works: '《古代汉语》（主编）《汉语史稿》《诗词格律》《中国语法理论》',
+      files: [
+        { label: '维基百科条目', href: 'https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%8A%9B_(%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%AE%B6)', note: '外部链接' }
+      ],
+      updated: '2026-11-21'
+    }
+  ];
+
+  (function () {
+    var box = document.getElementById('author-list');
+    if (!box) return;
+
+    box.innerHTML = AUTHORS.map(function (a) {
+      var lines = '';
+      if (a.works) {
+        lines += '<div><span>作品</span><span>' + a.works + '</span></div>';
+      }
+      var files = (a.files || []).map(function (f) {
+        var ext = /^https?:/i.test(f.href);
+        return '<a class="file' + (ext ? ' ext' : '') + '" href="' + f.href + '"' +
+               (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
+               f.label + '<em>' + (f.note || (ext ? '外部链接' : '站内文件')) + '</em></a>';
+      }).join('');
+
+      return '<article class="author">' +
+        '<h3>' + a.name + '<span class="years">' + a.years + '</span></h3>' +
+        '<p class="who">' + a.who + '</p>' +
+        '<p class="desc">' + a.desc + '</p>' +
+        '<div class="lines">' + lines + '</div>' +
+        (files ? '<div class="files">' + files + '</div>' : '') +
+        '<p class="upd">更新于 ' + a.updated + '</p>' +
+      '</article>';
+    }).join('');
+
+    var c = document.getElementById('count');
+    if (c) c.textContent = AUTHORS.length + ' 位';
+  })();
+</script>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
