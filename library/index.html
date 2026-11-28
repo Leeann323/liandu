@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>莲藏 · 我上传的资料 | 莲渡文汇</title>
-<meta name="description" content="莲渡文汇「莲藏」：站主自己扫描、整理、上传的资料，网盘链接与提取码集中在这里。文章与投稿在莲叙。">
+<title>莲藏 · 我做的东西 | 莲渡文汇</title>
+<meta name="description" content="莲渡文汇「莲藏」：站主自己写的工具、脚本与整理稿，代码放在 GitHub 仓库，这里只写一句它是干什么的。文章与投稿在莲叙。">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -38,13 +38,13 @@
 
   <section class="hero" style="padding:44px 0 24px">
     <p class="kicker">莲 藏</p>
-    <h1 style="font-size:clamp(23px,4vw,31px)">我上传的资料</h1>
+    <h1 style="font-size:clamp(23px,4vw,31px)">我做的东西</h1>
     <p class="lead">
-      这一页只放我自己扫描、整理、汇总之后上传的东西。文件都放在网盘，本站不存文件本体，
-      只登记名字、简介和链接——点开就跳走，提取码直接写在条目里。
+      这一页放我自己写的小工具、脚本和整理的资料。东西都放在 GitHub 仓库里，
+      本站一个文件也不存——这里只写一句它是干什么的，点进去看 README 就会用。
     </p>
     <p class="lead" style="font-size:13.5px;color:var(--muted);margin-bottom:0">
-      要看文章和投稿，去<a href="../qa/">莲叙</a>；这一页只管能下载的东西。
+      要看文章和投稿，去<a href="../qa/">莲叙</a>；这一页只管能拿走的代码和文件。
     </p>
   </section>
 
@@ -52,28 +52,28 @@
     <div class="two-col">
       <div class="note">
         <b>怎么拿</b><br>
-        点条目的按钮进网盘，提取码在按钮后面，选中就能复制。链接失效、文件损坏，
-        写信到 <a href="mailto:13332430323@189.cn">13332430323@189.cn</a> 说一声，我重新传。
+        点条目右下角的按钮进仓库，README 里写了装法、用法和已知的坑。
+        想提问题、报 bug，直接开仓库的 Issue，比写信快；也可以写信到
+        <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>。
       </div>
       <div class="note">
         <b>放什么</b><br>
-        我自己做的年表、目录、摘记、整理稿，以及我确认可以分享的内容。
-        <strong>站内一个文件都不存</strong>；他人作品的全文、扫描件、付费课程不放，见<a href="../rules/">站规</a>。
+        我自己写的代码、自己整理的资料。<strong>站内一个文件都不存</strong>，
+        正文都在 GitHub。他人作品的全文、扫描件、付费课程不放，见<a href="../rules/">站规</a>。
       </div>
     </div>
   </section>
 
   <section class="block" style="padding-top:10px">
-    <h2 class="sec">已上传 <small id="count"></small></h2>
+    <h2 class="sec">全部条目 <small id="count"></small></h2>
     <div id="file-list"></div>
     <noscript>
       <p class="note">列表需要 JavaScript 才能显示；条目内容写在页面源码的 <code>FILES</code> 里。</p>
     </noscript>
 
     <div class="note" style="margin-top:22px">
-      <b>没找到想要的，或者链接失效？</b>写信到
-      <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>，说清要哪一份，
-      我先紧着你要的那份做。
+      <b>没找到想要的？</b>写信到 <a href="mailto:13332430323@189.cn">13332430323@189.cn</a>，
+      说清要哪一份，我先紧着你要的那份做。
     </div>
   </section>
 
@@ -94,30 +94,74 @@
 </footer>
 
 <!--
-  ┌─ 怎么加一份 ─────────────────────────────────────────
+  ┌─ 怎么加一条 ─────────────────────────────────────────
   │ 在 FILES 数组里复制一段 { ... }，改字段：
   │   title    名字（必填）
-  │   desc     一两句说明，里面有什么
-  │   platform 网盘名，例如：百度网盘 / 阿里云盘 / 天翼云盘 / 夸克
-  │   link     分享链接（必填）
-  │   code     提取码；没有就写 ''
-  │   size     文件大小，例如：120 MB / 3 个文件
+  │   desc     一两句说明：它是干什么的，谁会用得上
+  │   tag      类型：工具 / 脚本 / 资料 / 源码
+  │   repo     GitHub 仓库，写成 Leeann323/xxx（必填）
+  │   lang     语言或技术栈，例如：Python · MediaPipe
+  │   note     想额外叮嘱一句就写，没有就删掉这行
   │   updated  更新日期
-  │ 加完 git push，约一分钟生效。站内不放文件本体，只放链接。
+  │ 加完 git push，约一分钟生效。站内不放文件本体，正文都在 GitHub。
   └──────────────────────────────────────────────────────
 -->
 <script>
   var FILES = [
-    // 示例（删掉换成你自己的）：
-    // {
-    //   title: '读书笔记模板（A5 方格本版）',
-    //   desc: '我自己用的三栏格式，打印后裁成 A5 贴在方格本上。含一页填写示例。',
-    //   platform: '百度网盘',
-    //   link: 'https://pan.baidu.com/s/xxxxxxxx',
-    //   code: 'ab12',
-    //   size: '1.2 MB',
-    //   updated: '2026-11-21'
-    // }
+    {
+      title: '莲舟 · LianZhou',
+      desc: 'Windows 11 上的浏览器 Agent 工作台。帮你把 Chrome for Testing 和 browser-use 装到位，'
+          + '左边是真实的浏览器窗口，右边是聊天面板：让它自己开网页办事，你随时能接管。'
+          + '国内模型预设好了 DeepSeek、Kimi、智谱、DashScope、Ollama，装完即用。',
+      tag: '工具',
+      repo: 'Leeann323/lianzhou',
+      lang: 'Electron · JavaScript · Python',
+      note: '不随包带浏览器，只给官方下载地址和应用内直连下载。',
+      updated: '2026-11-28'
+    },
+    {
+      title: 'LinguaTrans · 逐句翻译工作台',
+      desc: '不替你翻译，只把原文一句一句摆到你面前：屏幕取词、PDF、视频语音识别都能进来，'
+          + '浮窗像桌面歌词一样逐句输入译文，最后整成 Word（图片回原位）或烧成字幕。'
+          + '机翻在双关、行话、文化潜台词上只能给出「没错但不对」的版本，分寸这半件事留给译者。',
+      tag: '工具',
+      repo: 'Leeann323/linguatrans',
+      lang: 'Python · PySide6',
+      note: '文章 / 视频 / 校对三种模式；视频功能需要系统里有 ffmpeg。',
+      updated: '2026-10-14'
+    },
+    {
+      title: '居家老人跌倒监测',
+      desc: '一台普通摄像头就能 7×24 小时守着独居老人：MediaPipe 33 点骨架 + 三通道判决'
+          + '（冲击型跌倒 / 缓慢滑落型晕倒 / 坐位垂头型晕厥），状态机压掉误报，确认后推送到钉钉或企业微信。'
+          + '不用穿戴任何设备。',
+      tag: '工具',
+      repo: 'Leeann323/elderly-fall-detection',
+      lang: 'Python · MediaPipe · Java(Android)',
+      note: '原始画面不落盘、不上云，告警图只有纯黑底上的骨架线条。',
+      updated: '2026-11-05'
+    },
+    {
+      title: 'MG996R 舵机远程控制',
+      desc: '同一个 WiFi 下，用电脑或手机远程转一个 MG996R 舵机。给了两套能互换的方案：'
+          + 'ESP32（自带网页控制界面，第一次做选这个）和树莓派 / Linux 小主机（Python 手写服务端）。'
+          + '接线、供电、堵转烧板的坑都写在 README 里。',
+      tag: '脚本',
+      repo: 'Leeann323/-',
+      lang: 'Arduino · Python',
+      note: '仓库名就叫「-」，早年建的，地址看着怪但能用。',
+      updated: '2026-09-27'
+    },
+    {
+      title: '本站源码',
+      desc: '莲渡文汇这一站的全部页面：纯静态 HTML，一个 CSS，一段评论加载脚本，没有框架、没有构建步骤。'
+          + '想照着自己搭一个，fork 下来改文字就行。',
+      tag: '源码',
+      repo: 'Leeann323/liandu',
+      lang: 'HTML · CSS · JavaScript',
+      note: '评论用 Giscus（GitHub Discussions），不需要服务器和数据库。',
+      updated: '2026-11-28'
+    }
   ];
 
   (function () {
@@ -126,34 +170,32 @@
     if (!box) return;
 
     if (!FILES.length) {
-      if (c) c.textContent = '0 份';
+      if (c) c.textContent = '0 个';
       box.innerHTML =
         '<div class="note"><b>还空着。</b><br>' +
-        '材料还在整理，做好一份就挂一份，不凑数。如果你在等某一份，' +
-        '可以写信到 <a href="mailto:13332430323@189.cn">13332430323@189.cn</a> 说一声，' +
-        '我先紧着你要的那份做。</div>';
+        '东西还在整理，做好一个就挂一个，不凑数。</div>';
       return;
     }
 
-    if (c) c.textContent = FILES.length + ' 份';
+    if (c) c.textContent = FILES.length + ' 个';
 
     box.innerHTML = FILES.map(function (f) {
       var lines = [];
-      if (f.platform) lines.push({ k: '位置', v: f.platform });
-      if (f.size) lines.push({ k: '大小', v: f.size });
-      if (f.code) lines.push({ k: '提取码', v: '<code>' + f.code + '</code>' });
+      if (f.lang) lines.push({ k: '技术栈', v: f.lang });
+      if (f.note) lines.push({ k: '备注', v: f.note });
+
+      var url = 'https://github.com/' + f.repo;
 
       return '<article class="item">' +
-        '<div class="item-head"><h3>' + f.title + '</h3><span class="tag">网盘</span></div>' +
+        '<div class="item-head"><h3>' + f.title + '</h3>' +
+          (f.tag ? '<span class="tag">' + f.tag + '</span>' : '') +
+          '<span class="tag gh">GitHub</span></div>' +
         (f.desc ? '<p class="desc">' + f.desc + '</p>' : '') +
         (lines.length ? '<div class="lines">' + lines.map(function (l) {
           return '<div><span>' + l.k + '</span><span>' + l.v + '</span></div>';
         }).join('') + '</div>' : '') +
-        (f.link ? '<div class="files"><a class="file ext" href="' + f.link + '" target="_blank" rel="noopener">' +
-          '打开网盘<em>' + (f.platform || '外部链接') + '</em></a>' +
-          (f.code ? '<a class="file" href="' + f.link + '" target="_blank" rel="noopener">' +
-            '提取码 ' + f.code + '<em>点这里也能进</em></a>' : '') +
-          '</div>' : '') +
+        '<div class="files"><a class="file ext" href="' + url + '" target="_blank" rel="noopener">' +
+          '在 GitHub 打开<em>' + f.repo + '</em></a></div>' +
         (f.updated ? '<p class="upd">更新于 ' + f.updated + '</p>' : '') +
       '</article>';
     }).join('');

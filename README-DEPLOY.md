@@ -8,7 +8,7 @@ liandu/
 ├─ index.html                首页
 ├─ qa/index.html             莲叙（问答列表）
 ├─ qa/001-*.html  qa/002-*.html   问答详情（含评论区）
-├─ library/index.html        莲藏（索引）
+├─ library/index.html        莲藏（我做的东西，链到 GitHub）
 ├─ submit/index.html         投稿
 ├─ about/  rules/            关于 / 站规
 ├─ 404.html                  自定义 404（样式内联，任意路径可用）
